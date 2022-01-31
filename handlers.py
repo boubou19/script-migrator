@@ -72,7 +72,6 @@ class HandlerAssembler(Handler):
     def __init__(self):
         Handler.__init__(self, "Assembler.addRecipe")
 
-
     def parsing_logic(self, elems, **kwargs):
         elems = [prepare_item(elem) for elem in elems]
         fluid_present = kwargs["fluid_present"] if "fluid_present" in kwargs else False
@@ -115,6 +114,17 @@ class HandlerShapelessCrafting(Handler):
         inputs = ",\n".join(elems[1:])
         return f"\naddShapelessCraftingRecipe({output}, new Object[]{{\n{inputs}}});"
 
+class HandlerWiremill(Handler):
+    def __init__(self):
+        Handler.__init__(self, "Wiremill.addRecipe")
+
+    def parsing_logic(self, elems, **kwargs):
+        elems = [prepare_item(elem) for elem in elems]
+        output = elems[0]
+        input = elems[1]
+        time = elems[-2]
+        eu = elems[-1]
+        return f"\nGT_Values.RA.addWiremillRecipe({input}, {output}, {time}, {eu});"
 
 class HandlerExtremeShapedCrafting(Handler):
     def __init__(self):
@@ -148,4 +158,4 @@ handler_assembler = HandlerAssembler()
 handler_shaped_crafting = HandlerShapedCrafting()
 handler_shapless_crafting = HandlerShapelessCrafting()
 handler_extreme_shaped_crafting = HandlerExtremeShapedCrafting()
-
+handler_wiremill = HandlerWiremill()

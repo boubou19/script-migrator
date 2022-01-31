@@ -1,7 +1,8 @@
 from pprint import pprint
 from test import text
 from handlers import handler_assembler, handler_shaped_crafting, \
-    handler_shapless_crafting, handler_extreme_shaped_crafting
+    handler_shapless_crafting, handler_extreme_shaped_crafting, \
+    handler_wiremill
 
 default_strip_list = [" ", "[", "(", "<", ">", ")", "]", ";", "\n"]
 wildcard_value = 32767
@@ -9,14 +10,16 @@ wildcard_value = 32767
 handlers = {"addShaped": handler_shaped_crafting,
             "assembler": handler_assembler,
             "shapeless": handler_shapless_crafting,
-            "extreme_craft": handler_extreme_shaped_crafting}
+            "extreme_craft": handler_extreme_shaped_crafting,
+            "wiremill": handler_wiremill}
 
 
 def process_all(dic):
     mappings = {"addShaped": handler_shaped_crafting.process,
                 "assembler": handler_assembler.process,
                 "shapeless": handler_shapless_crafting.process,
-                "extreme_craft": handler_extreme_shaped_crafting.process}
+                "extreme_craft": handler_extreme_shaped_crafting.process,
+                "wiremill":handler_wiremill.process}
 
     dic["val"] = [x.strip("val") for x in dic["val"]]
     val_list = sorted(
