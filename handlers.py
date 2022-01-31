@@ -27,6 +27,11 @@ def prepare_item(string):
             quantity = 1
         else:
             quantity = parts[1][1]
+
+        # deal with fluid stacks
+        if parts[0] == "liquid":
+            return f"""FluidRegistry.getFluidStack({parts[1][0]}, {quantity})"""
+
         return f"""getModItem("{parts[0]}", "{parts[1][0]}", {quantity})"""
     elif len(parts) == 3:
         if parts[0] == "ore":  # funny: some smartasses put : in the oredict name
@@ -67,17 +72,19 @@ class HandlerAssembler(Handler):
     def __init__(self):
         Handler.__init__(self, "Assembler.addRecipe")
 
-    def process(self, string, fluid_present=False):
-        return Handler.process(string, fluid_present=fluid_present)
 
     def parsing_logic(self, elems, **kwargs):
+        elems = [prepare_item(elem) for elem in elems]
         fluid_present = kwargs["fluid_present"] if "fluid_present" in kwargs else False
         voltage = elems[-1]
         ticktime = elems[-2]
+        print(elems[-3])
+        fluid_present = "FluidRegistry.getFluidStack" in elems[-3]
         fluid = "GT_Values.NF" if not fluid_present else elems[-3]
+
         output_delimiter = -3 if fluid_present else -2
-        output = prepare_item(elems[0])
-        inputs = "\n" + ",\n".join([prepare_item(x) for x in elems[1:output_delimiter]])
+        output = elems[0]
+        inputs = "\n" + ",\n".join([x for x in elems[1:output_delimiter]])
 
         return f"""GT_Values.RA.addAssemblerRecipe(new ItemStack[]{{{inputs}}},
         {fluid},
