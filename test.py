@@ -8,39 +8,6 @@ Created on Thu Dec 30 18:31:54 2021
 text="""// --- Created By DreamMasterXXL --- 
 
 
-// --- Importing Stuff ---
-
-
-import mods.gregtech.Assembler;
-import mods.gregtech.Wiremill;
-
-
-// --- Removing Recipes ---
-
-
-// --- Drawbridge
-recipes.remove(<TMechworks:RedstoneMachine>);
-
-// --- Advances Drawbridge
-recipes.remove(<TMechworks:RedstoneMachine:2>);
-
-// --- Extended Drawbridge
-recipes.remove(<TMechworks:RedstoneMachine:3>);
-
-// --- Igniter
-recipes.remove(<TMechworks:RedstoneMachine:1>);
-
-// --- Signal Bus
-recipes.remove(<TMechworks:SignalBus>);
-
-// --- Signal Terminal
-recipes.remove(<TMechworks:SignalTerminal>);
-
-// --- Lengeth of Wire
-recipes.remove(<TMechworks:LengthWire>);
-
-// --- Spool of Wire
-recipes.remove(<TMechworks:SpoolWire:*>);
 
 
 

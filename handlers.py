@@ -30,7 +30,7 @@ def prepare_item(string):
 
         # deal with fluid stacks
         if parts[0] == "liquid":
-            return f"""FluidRegistry.getFluidStack({parts[1][0]}, {quantity})"""
+            return f"""FluidRegistry.getFluidStack("{parts[1][0]}", {quantity})"""
 
         return f"""getModItem("{parts[0]}", "{parts[1][0]}", {quantity})"""
     elif len(parts) == 3:
@@ -77,7 +77,6 @@ class HandlerAssembler(Handler):
         fluid_present = kwargs["fluid_present"] if "fluid_present" in kwargs else False
         voltage = elems[-1]
         ticktime = elems[-2]
-        print(elems[-3])
         fluid_present = "FluidRegistry.getFluidStack" in elems[-3]
         fluid = "GT_Values.NF" if not fluid_present else elems[-3]
 
