@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Dec 30 18:31:54 2021
-
-@author: Alexis
-"""
-
 text="""// --- Created By DreamMasterXXL --- 
 
 
